@@ -46,7 +46,8 @@ static bool Menu()
     switch (opcion)
     {
         case "1":
-            Console.WriteLine("Escogió la opción 1");
+            Console.WriteLine("Listado de datos registrados");
+            OpcionListar();
             break;
         case "2":
             // Console.WriteLine("Escogió la opción 2");
@@ -62,6 +63,26 @@ static bool Menu()
     }
     
     return continuar;
+}
+
+static void OpcionListar()
+{
+    DatoDAL datoDAL = new DatoDAL(); // Llamar a capa de acceso a datos
+
+    List<DatoDTO> datos = new List<DatoDTO>(); // crear una lista para obtener los datos
+
+    datos = datoDAL.Listar(); // obtener lista desde capa de acceso a datos
+
+    // recorrer y mostrar datos de cada elemento de lista
+    foreach (DatoDTO dato in datos)
+    {
+        Console.WriteLine("----------------------------------------------------------");
+        Console.Write($"Id: {dato.Id} - ");
+        Console.Write($"Flujo: {dato.Flujo} - ");
+        Console.Write($"Temperatura: {dato.Temperatura} - ");
+        Console.Write($"Nivel: {dato.Nivel} - ");
+        Console.Write($"Voltaje: {dato.Voltaje}\n");
+    } 
 }
 
 static void OpcionInsertar()
